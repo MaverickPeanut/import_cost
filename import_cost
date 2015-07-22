@@ -1,0 +1,37 @@
+#! /usr/bin/env python3
+# Author: Ding Junying
+# Date:   July 21, 2015
+# Description: A tool to calculate import cost
+
+VAT_RATE = 0.17
+CUSTOM_DUTY_RATE = 0.1
+AGENT_COST_RATE = 0.01
+CURRENCY_RATE = 6.5
+
+# Wait to input flag
+wait_input = True
+
+while wait_input:
+    price_usd_string = input("Please type in the price in US$:")
+    try:
+        price_usd = float(price_usd_string)
+    except:
+        wait_input = True
+        print("The price is not a valid value in US$")
+    else:
+        wait_input = False
+price_rmb = price_usd * CURRENCY_RATE
+custom_duty = price_rmb * CUSTOM_DUTY_RATE
+vat = (price_rmb + custom_duty) * VAT_RATE
+agent_cost = (price_rmb + custom_duty + vat) * AGENT_COST_RATE
+total_cost = price_rmb + custom_duty + vat + agent_cost
+print ("FOB Price: USD%0.2f; RMB%0.2f" %(price_usd, price_rmb))
+print ("Custom Duty: RMB%0.2f" %custom_duty)
+print ("VAT: RMB%0.2f" %vat)
+print ("Agent Cost: RMB%0.2f" %agent_cost)
+print ("Total Cost: RMB%0.2f" %(total_cost))
+
+
+
+
+
